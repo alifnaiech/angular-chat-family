@@ -10,7 +10,8 @@ export class ChatService {
   
   constructor() {}
 
-  socket = io('http://192.168.9.17:3000');
+  // socket = io('http://192.168.9.17:3000');
+  socket = io('http://localhost:3000');
   public sendMessage(message:any) {
     this.socket.emit('message', message);
   }
