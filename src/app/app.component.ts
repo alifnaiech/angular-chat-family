@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 @Component({
   selector: 'app-root',
@@ -6,9 +6,9 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  newMessage!: string;
+  newMessage: string = '';
   messageList: string[] = [];
-
+  @ViewChild("myInput", {static: false}) myInput!: ElementRef;
   constructor(private chatService: ChatService){
 
   }
@@ -19,8 +19,13 @@ export class AppComponent {
     })
   }
 
-  sendMessage() {
+  sendMessage(){
     this.chatService.sendMessage(this.newMessage);
     this.newMessage = '';
   }
+
+  onSelectEmoji(e:any){
+    this.newMessage += e.emoji.native
+  }
+
 }
